@@ -30,6 +30,28 @@ app.get("/dayMatches", async (req, res) => {
   res.json(json);
 });
 
+app.get("/inter", async (req, res) => {
+  const response = await fetch("https://api.football-data.org/v2/teams/108", {
+    headers: {
+      "X-Auth-Token": process.env.API_TOKEN
+    }
+  });
+  const json = await response.json();
+  res.json(json);
+});
+app.get("/inter-games", async (req, res) => {
+  const response = await fetch(
+    "https://api.football-data.org/v2/teams/108/matches",
+    {
+      headers: {
+        "X-Auth-Token": process.env.API_TOKEN
+      }
+    }
+  );
+  const json = await response.json();
+  res.json(json);
+});
+
 const port = process.env.PORT || 1228;
 app.listen(port, () => {
   console.log(`Listening at http://localhost:${port}`);
