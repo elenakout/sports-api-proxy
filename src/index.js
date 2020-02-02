@@ -1,13 +1,21 @@
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
-const fetch = require("node-fetch");
+// const fetch = require("node-fetch");
+const helmet = require("helmet");
 
 require("dotenv").config();
+
+const middlewares = require("./middlewares");
+const fdata = require("./api/fdata");
 
 const app = express();
 app.use(morgan("common"));
 app.use(cors());
+
+app.use(helmet());
+
+const BASE_URL = "https://api.football-data.org/v2";
 
 app.get("/", (req, res) => {
   res.json({
@@ -15,44 +23,13 @@ app.get("/", (req, res) => {
   });
 });
 
-// const TWITTER_BASE_URL = "https://api.twitter.com/1.1";
+app.use("/api", fdata);
 
-app.get("/dayMatches", async (req, res) => {
-  const response = await fetch(
-    "https://api.football-data.org/v2/competitions/SA/matches/?matchday=14",
-    {
-      headers: {
-        "X-Auth-Token": process.env.API_TOKEN
-      }
-    }
-  );
-  const json = await response.json();
-  res.json(json);
-});
-
-app.get("/inter", async (req, res) => {
-  const response = await fetch("https://api.football-data.org/v2/teams/108", {
-    headers: {
-      "X-Auth-Token": process.env.API_TOKEN
-    }
-  });
-  const json = await response.json();
-  res.json(json);
-});
-app.get("/inter-games", async (req, res) => {
-  const response = await fetch(
-    "https://api.football-data.org/v2/teams/108/matches",
-    {
-      headers: {
-        "X-Auth-Token": process.env.API_TOKEN
-      }
-    }
-  );
-  const json = await response.json();
-  res.json(json);
-});
+app.use(middlewares.notFound);
+app.use(middlewares.errorHandler);
 
 const port = process.env.PORT || 1228;
+
 app.listen(port, () => {
   console.log(`Listening at http://localhost:${port}`);
 });
