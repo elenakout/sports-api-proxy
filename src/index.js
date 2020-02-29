@@ -15,15 +15,13 @@ app.use(cors());
 
 app.use(helmet());
 
-const BASE_URL = "https://api.football-data.org/v2";
-
 app.get("/", (req, res) => {
   res.json({
     message: "Hello World!"
   });
 });
 
-app.use("/api", fdata);
+app.use("/api/v1", fdata);
 
 app.use(middlewares.notFound);
 app.use(middlewares.errorHandler);

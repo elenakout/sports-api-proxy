@@ -9,7 +9,7 @@ const BASE_URL = "https://api.football-data.org/v2";
 
 router.get("/next-game", async (req, res) => {
   const response = await fetch(
-    `${BASE_URL}/teams/108/matches?status=SCHEDULED&limit=1`,
+    `${BASE_URL}/teams/108/matches?status=SCHEDULED`,
     {
       headers: {
         "X-Auth-Token": process.env.API_TOKEN
