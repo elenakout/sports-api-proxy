@@ -52,10 +52,10 @@ router.get("/teams/:id", async (req, res) => {
   res.json(json);
 });
 
-// Stadings
+// Standings
 // http://api.football-data.org/v2/competitions/SA/standings
 
-router.get("/stadings", async (req, res) => {
+router.get("/standings", async (req, res) => {
   const teamId = req.params.id;
 
   const response = await fetch(`${BASE_URL}/competitions/SA/standings`, {
