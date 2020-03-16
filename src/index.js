@@ -1,27 +1,27 @@
-const express = require("express");
-const morgan = require("morgan");
-const cors = require("cors");
+const express = require('express');
+const morgan = require('morgan');
+const cors = require('cors');
 // const fetch = require("node-fetch");
-const helmet = require("helmet");
+const helmet = require('helmet');
 
-require("dotenv").config();
+require('dotenv').config();
 
-const middlewares = require("./middlewares");
-const fdata = require("./api/fdata");
+const middlewares = require('./middlewares');
+const fdata = require('./api/fdata');
 
 const app = express();
-app.use(morgan("common"));
+app.use(morgan('common'));
 app.use(cors());
 
 app.use(helmet());
 
-app.get("/", (req, res) => {
+app.get('/', (req, res) => {
   res.json({
-    message: "Hello World!"
+    message: 'Welcome to the Football Proxy API',
   });
 });
 
-app.use("/api/v1", fdata);
+app.use('/api/v1', fdata);
 
 app.use(middlewares.notFound);
 app.use(middlewares.errorHandler);
@@ -31,3 +31,18 @@ const port = process.env.PORT || 1228;
 app.listen(port, () => {
   console.log(`Listening at http://localhost:${port}`);
 });
+
+// const express = require('express');
+
+// const scrapeTable = require('./scrapeTable');
+
+// const app = express();
+
+// app.get('/', async (req, res) => {
+//   const data = await scrapeTable();
+//   res.json(data);
+// });
+
+// app.listen(1919, () => {
+//   console.log('Listening at http://localhost:1919');
+// });
