@@ -1,7 +1,10 @@
 const { Router } = require('express');
 const fetch = require('node-fetch');
 
+// Controllers
 const nextGame = require('./controllers/next-game');
+const matchInfo = require('./controllers/match-info');
+const teamsInfo = require('./controllers/teams-info');
 
 const router = Router();
 
@@ -21,14 +24,8 @@ router.get('/next-game', async (req, res) => {
 router.get('/match/:id', async (req, res) => {
   const matchId = req.params.id;
 
-  const response = await fetch(`${BASE_URL}/matches/${matchId}`, {
-    headers: {
-      'X-Auth-Token': process.env.API_TOKEN,
-    },
-  });
-
-  const json = await response.json();
-  res.json(json);
+  const data = await matchInfo(matchId);
+  res.json(data);
 });
 
 // teams info
@@ -36,13 +33,8 @@ router.get('/match/:id', async (req, res) => {
 router.get('/teams/:id', async (req, res) => {
   const teamId = req.params.id;
 
-  const response = await fetch(`${BASE_URL}/teams/${teamId}`, {
-    headers: {
-      'X-Auth-Token': process.env.API_TOKEN,
-    },
-  });
+  const json = await teamsInfo(teamId);
 
-  const json = await response.json();
   res.json(json);
 });
 

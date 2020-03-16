@@ -1,7 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
-// const fetch = require("node-fetch");
 const helmet = require('helmet');
 
 require('dotenv').config();
@@ -31,18 +30,3 @@ const port = process.env.PORT || 1228;
 app.listen(port, () => {
   console.log(`Listening at http://localhost:${port}`);
 });
-
-// const express = require('express');
-
-// const scrapeTable = require('./scrapeTable');
-
-// const app = express();
-
-// app.get('/', async (req, res) => {
-//   const data = await scrapeTable();
-//   res.json(data);
-// });
-
-// app.listen(1919, () => {
-//   console.log('Listening at http://localhost:1919');
-// });
