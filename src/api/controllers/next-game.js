@@ -2,30 +2,30 @@ const fetch = require('node-fetch');
 
 const BASE_URL = 'https://api.football-data.org/v2';
 
-let cache = {};
+let cache = null;
 let lastCacheTime = null;
 
 async function nextGame() {
-  if (cache && lastCacheTime > Date.now() - 60 * 60 * 12) {
-    console.log('chase returned');
+  if (cache && lastCacheTime > Date.now() - 1000 * 60 * 10) {
+    console.log('cache');
     return cache;
+  } else {
+    const response = await fetch(
+      `${BASE_URL}/teams/108/matches?status=SCHEDULED`,
+      {
+        headers: {
+          'X-Auth-Token': process.env.API_TOKEN,
+        },
+      }
+    );
+
+    const nGame = await response.json();
+    lastCacheTime = Date.now();
+    cache = nGame.matches[0];
+    console.log('call');
+
+    return nGame.matches[0];
   }
-
-  const response = await fetch(
-    `${BASE_URL}/teams/108/matches?status=SCHEDULED`,
-    {
-      headers: {
-        'X-Auth-Token': process.env.API_TOKEN,
-      },
-    }
-  );
-
-  const nGame = await response.json();
-  lastCacheTime = Date.now();
-  cache.nGame = nGame;
-  cache.status = 'ok';
-  console.log('call returned');
-  return nGame;
 }
 
 module.exports = nextGame;
