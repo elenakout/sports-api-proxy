@@ -6,7 +6,7 @@ let cache = null;
 let lastCacheTime = null;
 
 async function nextGame() {
-  if (cache && lastCacheTime > Date.now() - 1000 * 60 * 10) {
+  if (cache && lastCacheTime > Date.now() - 60 * 60 * 12) {
     console.log('cache');
     return cache;
   } else {
