@@ -415,12 +415,10 @@ let lastTeam = null;
 
 async function teamsInfo(teamId) {
   if (teamId == 108) {
-    console.log('teamId: Inter');
     return interFc;
   } else {
     if (lastTeam) {
       if (lastTeam.id == teamId) {
-        console.log('teamId: LastTeam');
         return lastTeam;
       }
     }
@@ -432,7 +430,6 @@ async function teamsInfo(teamId) {
 
     const tInfo = await response.json();
     lastTeam = tInfo;
-    console.log('teams-id:', teamId);
     return tInfo;
   }
 }

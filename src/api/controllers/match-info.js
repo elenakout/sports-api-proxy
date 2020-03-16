@@ -7,7 +7,6 @@ let lastCacheTime = null;
 
 async function matchInfo(matchId) {
   if (cache && lastCacheTime > Date.now() - 60 * 60 * 12) {
-    console.log('match-info: cache');
     return cache;
   }
 
@@ -20,7 +19,7 @@ async function matchInfo(matchId) {
   const mInfo = await response.json();
   lastCacheTime = Date.now();
   cache = mInfo;
-  console.log('match-info: call');
+
   return mInfo;
 }
 
