@@ -54,7 +54,7 @@ const interFc = {
       lastUpdated: '2020-03-04T17:25:04Z',
     },
   ],
-  name: 'FC Internazionale Milano',
+  name: 'Inter FC',
   shortName: 'Inter',
   tla: 'INT',
   crestUrl:
