@@ -5,6 +5,7 @@ const fetch = require('node-fetch');
 const nextGame = require('./controllers/next-game');
 const matchInfo = require('./controllers/match-info');
 const teamsInfo = require('./controllers/teams-info');
+const standings = require('./controllers/standings');
 
 const router = Router();
 
@@ -42,20 +43,9 @@ router.get('/teams/:id', async (req, res) => {
 // http://api.football-data.org/v2/competitions/SA/standings
 
 router.get('/standings', async (req, res) => {
-  const teamId = req.params.id;
+  const json = await standings(BASE_URL);
 
-  const response = await fetch(`${BASE_URL}/competitions/SA/standings`, {
-    headers: {
-      'X-Auth-Token': process.env.API_TOKEN,
-    },
-  });
-
-  const json = await response.json();
-  res.json({
-    competition: json.competition,
-    currentMatchday: json.season.currentMatchday,
-    standings: json.standings[0].table,
-  });
+  res.json(json);
 });
 
 module.exports = router;
