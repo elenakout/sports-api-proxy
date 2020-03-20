@@ -1,16 +1,14 @@
 const fetch = require('node-fetch');
 
-const BASE_URL = 'https://api.football-data.org/v2';
-
 let cache = null;
 let lastCacheTime = null;
 
-async function matchInfo(matchId) {
+async function matchInfo(base, matchId) {
   if (cache && lastCacheTime > Date.now() - 60 * 60 * 12) {
     return cache;
   }
 
-  const response = await fetch(`${BASE_URL}/matches/${matchId}`, {
+  const response = await fetch(`${base}/matches/${matchId}`, {
     headers: {
       'X-Auth-Token': process.env.API_TOKEN,
     },

@@ -1,7 +1,5 @@
 const fetch = require('node-fetch');
 
-const BASE_URL = 'https://api.football-data.org/v2';
-
 const interFc = {
   id: 108,
   area: {
@@ -413,7 +411,7 @@ const interFc = {
 
 let lastTeam = null;
 
-async function teamsInfo(teamId) {
+async function teamsInfo(base, teamId) {
   if (teamId == 108) {
     return interFc;
   } else {
@@ -422,7 +420,7 @@ async function teamsInfo(teamId) {
         return lastTeam;
       }
     }
-    const response = await fetch(`${BASE_URL}/teams/${teamId}`, {
+    const response = await fetch(`${base}/teams/${teamId}`, {
       headers: {
         'X-Auth-Token': process.env.API_TOKEN,
       },

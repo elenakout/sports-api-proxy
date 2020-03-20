@@ -13,7 +13,7 @@ const BASE_URL = 'https://api.football-data.org/v2';
 //Next game
 
 router.get('/next-game', async (req, res) => {
-  const data = await nextGame();
+  const data = await nextGame(BASE_URL);
 
   res.json(data);
 });
@@ -24,7 +24,7 @@ router.get('/next-game', async (req, res) => {
 router.get('/match/:id', async (req, res) => {
   const matchId = req.params.id;
 
-  const data = await matchInfo(matchId);
+  const data = await matchInfo(BASE_URL, matchId);
   res.json(data);
 });
 
@@ -33,7 +33,7 @@ router.get('/match/:id', async (req, res) => {
 router.get('/teams/:id', async (req, res) => {
   const teamId = req.params.id;
 
-  const json = await teamsInfo(teamId);
+  const json = await teamsInfo(BASE_URL, teamId);
 
   res.json(json);
 });
@@ -51,7 +51,11 @@ router.get('/standings', async (req, res) => {
   });
 
   const json = await response.json();
-  res.json(json);
+  res.json({
+    competition: json.competition,
+    currentMatchday: json.season.currentMatchday,
+    standings: json.standings[0].table,
+  });
 });
 
 module.exports = router;
