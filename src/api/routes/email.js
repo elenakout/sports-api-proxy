@@ -2,7 +2,7 @@ const express = require('express');
 
 const {
   sendEmail,
-} = require('../contollers/email');
+} = require('../controllers/email');
 
 const router = express.Router();
 
