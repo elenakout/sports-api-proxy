@@ -6,7 +6,8 @@ const helmet = require('helmet');
 require('dotenv').config();
 
 const middlewares = require('./middlewares');
-const fdata = require('./api/fdata');
+const fdata = require('./api/routes/fdata');
+const email = require('./api/routes/email');
 
 const app = express();
 app.use(morgan('common'));
@@ -20,7 +21,8 @@ app.get('/', (req, res) => {
   });
 });
 
-app.use('/api/v1', fdata);
+app.use('/api/v1/games', fdata);
+app.use('/api/v1/mail', email);
 
 app.use(middlewares.notFound);
 app.use(middlewares.errorHandler);

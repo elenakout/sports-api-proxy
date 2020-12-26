@@ -2,10 +2,10 @@ const { Router } = require('express');
 const fetch = require('node-fetch');
 
 // Controllers
-const nextGame = require('./controllers/next-game');
-const matchInfo = require('./controllers/match-info');
-const teamsInfo = require('./controllers/teams-info');
-const standings = require('./controllers/standings');
+const nextGame = require('../controllers/next-game');
+const matchInfo = require('../controllers/match-info');
+const teamsInfo = require('../controllers/teams-info');
+const standings = require('../controllers/standings');
 
 const router = Router();
 
