@@ -17,7 +17,7 @@ app.use(helmet());
 
 app.get('/', (req, res) => {
   res.json({
-    message: 'Welcome to the Football Proxy API',
+    message: 'Cloud functions for InterClubGreece',
   });
 });
 
