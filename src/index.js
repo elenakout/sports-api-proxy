@@ -13,7 +13,9 @@ const email = require('./api/routes/email');
 
 const app = express();
 app.use(morgan('common'));
-app.use(cors());
+app.use(cors({
+  origin: 'https://interclubgreece.com/'
+}));
 
 app.use(helmet());
 
