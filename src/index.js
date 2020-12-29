@@ -12,12 +12,15 @@ const fdata = require('./api/routes/fdata');
 const email = require('./api/routes/email');
 
 const app = express();
+app.use(cors());
 app.use(morgan('common'));
-app.use(cors({
-  origin: 'https://interclubgreece.com'
-}));
 
 app.use(helmet());
+
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+})
 
 app.get('/', (req, res) => {
   res.json({
