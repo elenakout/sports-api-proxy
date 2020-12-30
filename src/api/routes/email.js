@@ -8,10 +8,10 @@ const {
 
 const router = express.Router();
 
-router.all('*', cors());
+// router.all('*', cors());
 
 router
   .route('/send-email')
-  .post(sendEmail);
+  .post(cors(), sendEmail);
 
 module.exports = router;
