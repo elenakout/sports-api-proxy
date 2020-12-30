@@ -1,6 +1,4 @@
 const fetch = require('node-fetch');
-// const emailjs = require('emailjs-com');
-
 
 // @desc  Send email request to email.js
 // @route POST/api/v1/send-email
@@ -10,34 +8,21 @@ exports.sendEmail = async (req, res, next) => {
   const date = new Date(req.body.date);
   const cardstatus = req.body.card ? 'ΝΑΙ' : 'ΟΧΙ'
 
-  console.log('body: ', req.body);
-
   // SEND EMAIL
-  // const templateParams = {
-    //   firstName: req.body.name,
-    //   lastName: req.body.lastname,
-    //   card: cardstatus,
-    //   phone: req.body.phone,
-    //   date: date.toLocaleDateString('el-GR', options),
-    //   city: req.body.city,
-    // };
-
-    // SEND EMAIL
-    const maildata = {
-      service_id: process.env.SERVICE_ID,
-      template_id: process.env.TEMPLATE_ID,
-      user_id: process.env.USER_ID,
-      template_params: {
-        firstName: req.body.name,
-        lastName: req.body.lastname,
-        card: cardstatus,
-        phone: req.body.phone,
-        date: date.toLocaleDateString('el-GR', options),
-        city: req.body.city,
-      },
-    };
-    console.log('template: ', maildata);
-    try {
+  const maildata = {
+    service_id: process.env.SERVICE_ID,
+    template_id: process.env.TEMPLATE_ID,
+    user_id: process.env.USER_ID,
+    template_params: {
+      firstName: req.body.name,
+      lastName: req.body.lastname,
+      card: cardstatus,
+      phone: req.body.phone,
+      date: date.toLocaleDateString('el-GR', options),
+      city: req.body.city,
+    },
+  };
+  try {
     const response = await fetch(
       'https://api.emailjs.com/api/v1.0/email/send',
       {
@@ -54,17 +39,6 @@ exports.sendEmail = async (req, res, next) => {
       text: mailres,
     });
 
-    // try {
-    //   const response = await emailjs.send(process.env.SERVICE_ID, process.env.TEMPLATE_ID, templateParams, process.env.USER_ID);
-    //   const emailres = await response.json();
-
-    //   console.log(process.env.TEMPLATE_ID);
-
-    //   res.status(200).json({
-    //     success: true,
-    //     status: emailres.status,
-    //     text: emailres.text,
-    //   });
   } catch (error) {
     res.status(400).json({
       success: false,
