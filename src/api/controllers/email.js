@@ -34,6 +34,9 @@ exports.sendEmail = async (req, res, next) => {
 
     const mailres = response.json();
 
+    console.log(response);
+    console.log(mailres);
+
     res.status(200).json({
       success: true,
       text: mailres,
