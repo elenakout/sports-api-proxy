@@ -12,11 +12,11 @@ const fdata = require('./api/routes/fdata');
 const email = require('./api/routes/email');
 
 const app = express();
-app.use(cors());
 app.use(morgan('common'));
 
 app.use(helmet());
 
+app.use(cors());
 
 app.get('/', (req, res) => {
   res.json({
