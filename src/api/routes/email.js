@@ -1,5 +1,5 @@
 const express = require('express');
-const cors = require('cors');
+// const cors = require('cors');
 
 const {
   sendEmail,
@@ -12,6 +12,6 @@ const router = express.Router();
 
 router
   .route('/send-email')
-  .post(cors(), sendEmail);
+  .post(sendEmail);
 
 module.exports = router;
