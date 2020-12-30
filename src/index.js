@@ -3,16 +3,17 @@ const morgan = require('morgan');
 const cors = require('cors');
 const helmet = require('helmet');
 
-
 require('dotenv').config();
-
 
 const middlewares = require('./middlewares');
 const fdata = require('./api/routes/fdata');
 const email = require('./api/routes/email');
 
 const app = express();
-app.use(cors());
+
+// Body parser
+app.use(express.json());
+
 app.use(morgan('common'));
 
 app.use(helmet());
