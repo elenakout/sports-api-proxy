@@ -1,7 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
-const helmet = require('helmet');
+// const helmet = require('helmet');
 
 
 require('dotenv').config();
@@ -14,7 +14,7 @@ const email = require('./api/routes/email');
 const app = express();
 app.use(morgan('common'));
 
-app.use(helmet());
+// app.use(helmet());
 
 app.use(cors());
 
