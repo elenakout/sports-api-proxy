@@ -32,7 +32,7 @@ exports.sendEmail = async (req, res, next) => {
       },
     );
 
-    const mailres = response.json();
+    const mailres = await response.json();
 
     console.log(response);
     console.log(mailres);
