@@ -10,7 +10,8 @@ exports.sendEmail = async (req, res, next) => {
   const date = new Date(req.body.date);
   const cardstatus = req.body.card ? 'ΝΑΙ' : 'ΟΧΙ'
 
-  console.log(req.body);
+  console.log('body: ', req.body);
+  console.log('template: ', process.env.TEMPLATE_ID);
 
   // SEND EMAIL
   const templateParams = {
@@ -36,7 +37,6 @@ exports.sendEmail = async (req, res, next) => {
     res.status(400).json({
       success: false,
       data: error,
-      send: maildata,
     })
   }
 }
