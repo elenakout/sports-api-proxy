@@ -7,6 +7,8 @@ const {
 
 const router = express.Router();
 
+router.all('*', cors());
+
 router
   .route('/send-email')
   .post(sendEmail);
